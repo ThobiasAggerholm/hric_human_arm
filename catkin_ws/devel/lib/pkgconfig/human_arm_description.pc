@@ -1,0 +1,8 @@
+prefix=/home/thobias/Documents/hric_human_arm/catkin_ws/devel
+
+Name: human_arm_description
+Description: Description of human_arm_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
