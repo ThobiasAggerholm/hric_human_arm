@@ -1,0 +1,5 @@
+<library path="lib/libhuman_arm_control_lib">
+    <class name ="human_arm_control/pd_grav_control"
+        type="pd_grav_control"
+        base_class_type="controller_interface::ControllerBase"/>
+</library>
