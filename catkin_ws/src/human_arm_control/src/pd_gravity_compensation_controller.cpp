@@ -44,17 +44,18 @@ class pd_grav_control : public controller_interface::Controller<hardware_interfa
         }
 
         //Get proportional gains
-        if(!n.getParam("pid/p", kps_))
+        for(int i = 0; i < n_joints_; ++i)
         {
-            ROS_ERROR("Joint kp values could not be found on parameter server under /pid/p.");
-            return false;
-        }
-
-        //Get proportional gains
-        if(!n.getParam("pid/d", kds_))
-        {
-            ROS_ERROR("Joint kd values could not be found on parameter server under /pid/d.");
-            return false;
+            if(!n.getParam("pid/" + param_joints[i] + "/p", kps_[i]))
+            {
+                ROS_ERROR("Joint kp values could not be found on parameter server under /pid/p.");
+                return false;
+            }
+            if(!n.getParam("pid/" + param_joints[i] + "/d", kds_[i]))
+            {
+                ROS_ERROR("Joint kp values could not be found on parameter server under /pid/p.");
+                return false;
+            } 
         }
 
         //Get KDL tree

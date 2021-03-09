@@ -1,0 +1,57 @@
+human_arm:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  Human_arm_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: {joint_Scaphant_Humphant, joint_Humphant_Humphant1,
+       joint_Humphant1_Humerus, joint_Humerus_Ulna,
+        joint_Ulna_Radius, joint_Radius_Z6,
+      joint_Z6_Lunate}
+    pid: {
+      joint_Scaphant_Humphant : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Humphant_Humphant1 : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Humphant1_Humerus : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Humerus_Ulna : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Ulna_Radius : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Radius_Z6 : {p: 100.0, i: 0.01, d: 10.0},
+      joint_Z6_Lunate : {p: 100.0, i: 0.01, d: 10.0}
+    }
+
+  Scaphant_Humphant_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Scaphant_Humphant
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+    
+  Humphant_Humphant1_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Humphant_Humphant1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  Humphant1_Humerus_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Humphant1_Humerus
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  
+  Humerus_Ulna_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Humerus_Ulna
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  Ulna_Radius_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Ulna_Radius
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  Radius_Z6_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Radius_Z6
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  Z6_Lunate_position_controller:
+    type: human_arm_control/pd_grav_control
+    joint: joint_Z6_Lunate
+    pid: {p: 100.0, i: 0.01, d: 10.0}

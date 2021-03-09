@@ -128,7 +128,7 @@ include_directories(
 #   src/${PROJECT_NAME}/human_arm_control.cpp
 # )
 add_library(
-  human_arm_control_lib src/human_arm_control.cpp
+  human_arm_control_lib src/pd_gravity_compensation_controller.cpp
 )
 
 ## Add cmake target dependencies of the library

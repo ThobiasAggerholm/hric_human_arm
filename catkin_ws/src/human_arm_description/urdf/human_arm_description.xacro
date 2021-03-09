@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="human_arm">
+    <xacro:property name="scale" value="${1}" />
+    <xacro:property name="bone_density" value="${1850 * 100}" />
+
+    <xacro:property name="len_humerus_y" value="${0.2904*scale}" />
+    <xacro:property name="len_ulna_z" value="${0.0200*scale}" />
+    <xacro:property name="len_humerus_z" value="${0.0123 * scale}" />
+    <xacro:property name="len_humerus_x" value="${0.0061*scale}" />
+    <xacro:property name="len_ulna_y" value="${0.0115*scale}" />
+    <xacro:property name="len_radius_y" value=" ${0.2420*scale}" />
+    <xacro:property name="len_radius_yprime" value="${0.0040*scale}" />
+    <xacro:property name="len_radius_d" value="${0.0292*scale}" />
+    <xacro:property name="len_radius_a" value="${0.0105*scale}" />
+
+    <!--Limits interfere with transformations. There is therefor given full range for each link temporarily-->
+    <xacro:property name="joint1_lower" value="${radians(-90)}" /><!-- -90, 130-->
+    <xacro:property name="joint1_upper" value="${radians(130)}" />
+    <xacro:property name="joint2_lower" value="${radians(0)}" /><!-- 0, 180-->
+    <xacro:property name="joint2_upper" value="${radians(180)}" />
+    <xacro:property name="joint3_lower" value="${radians(-220)}" /><!-- -310, 20--> <!-- Humerus does not make any sense-->
+    <xacro:property name="joint3_upper" value="${radians(110)}" />
+    <xacro:property name="joint4_lower" value="${radians(0)}" /><!-- 180, 310-->
+    <xacro:property name="joint4_upper" value="${radians(130)}" />
+    <xacro:property name="joint5_lower" value="${radians(-90)}" /><!-- -214.2, 34.2-->
+    <xacro:property name="joint5_upper" value="${radians(90)}" />
+    <xacro:property name="joint6_lower" value="${radians(-10)}" /><!-- 91.3, 126.3 -->
+    <xacro:property name="joint6_upper" value="${radians(25)}" />
+    <xacro:property name="joint7_lower" value="${radians(-35)}" /><!-- -21.3, 48.7-->
+    <xacro:property name="joint7_upper" value="${radians(35)}" />
+
+
+
+
+    <xacro:macro name ="ax_to_rpy" params="ax:=0 ay:=0 az:=0 bx:=0 by:=0 bz:=0">
+        <xacro:if value="${bx != 0 or by != 0 or bz != 0}">
+            <xacro:property name="rvx" value="${ay*bz-az*by}" />
+            <xacro:property name="rvy" value="${az*bx-ax*bz}" />
+            <xacro:property name="rvz" value="${ax*by-ay*bx}" />
+            <xacro:property name="angle" value="${acos((ax*bx + ay*by + az*bz)/(sqrt(pow(ax,2) + pow(ay,2) + pow(az,2)) * sqrt(pow(bx,2) + pow(by,2) + pow(bz, 2))))}" />
+
+            <xacro:property name="r32" value="${rvy*rvz*(1-cos(angle)) + rvx*sin(angle)}" />
+            <xacro:property name="r33" value="${pow(rvz,2)*(1-cos(angle))+cos(angle)}" />
+            <xacro:property name="r31" value="${rvx*rvz*(1-cos(angle)) - rvy*sin(angle)}" />
+            <xacro:property name="r21" value="${rvx*rvy*(1-cos(angle)) + rvz*sin(angle)}" />
+            <xacro:property name="r11" value="${pow(rvx,2)*(1-cos(angle)) + cos(angle)}" />
+
+            <xacro:property name="ax_roll" scope="parent" value="${atan2(r32, r33)}" />
+            <xacro:property name="ax_pitch" scope="parent" value="${atan2(-r31, sqrt(pow(r32,2) + pow(r33,2)))}" />
+            <xacro:property name="ax_yaw" scope="parent" value="${atan2(r21, r11)}" />
+        </xacro:if>
+
+        <xacro:if value="${bx == 0 and by == 0 and bz == 0}">
+            <xacro:property name="ax_roll" scope="parent" value="0" />
+            <xacro:property name="ax_pitch" scope="parent" value="0" />
+            <xacro:property name="ax_yaw" scope="parent" value="0" />
+        </xacro:if>
+
+    </xacro:macro>
+
+    <xacro:macro name="DH_inverse_translation" params="theta:=0 d:=0 a:=0 alpha:=0">
+        <xacro:property name="dh_inverse_translation_x" scope="parent" value="${-a*cos(theta)}" />
+        <xacro:property name="dh_inverse_translation_y" scope="parent" value="${a*sin(theta)+d*cos(alpha)*sin(alpha)*cos(theta)-d*sin(alpha)*cos(alpha)*cos(theta)}" />
+        <xacro:property name="dh_inverse_translation_z" scope="parent" value="${-d*sin(alpha)*sin(alpha)-d*cos(alpha)*cos(alpha)}" />
+    </xacro:macro>
+
+    <xacro:macro name="dh_to_urdf" params = "theta:=0 d:=0 a:=0 alpha:=0">
+        <xacro:property name="r32" value="${sin(alpha) * cos(theta)}" />
+        <xacro:property name="r33" value="${cos(alpha)}" />
+        <xacro:property name="r31" value="${sin(alpha)*sin(theta)}" />
+        <xacro:property name="r21" value="${cos(alpha)*sin(theta)}" />
+        <xacro:property name="r11" value="${cos(theta)}" />
+
+        <xacro:property name="dh_to_urdf_roll" scope="parent" value="${atan2(r32, r33)}" />
+        <xacro:property name="dh_to_urdf_pitch" scope="parent" value="${atan2(-r31, sqrt(pow(r32,2) + pow(r33,2)))}" />
+        <xacro:property name="dh_to_urdf_yaw" scope="parent" value="${atan2(r21, r11)}" />
+
+        <xacro:property name="dh_to_urdf_x" scope="parent" value="${a}" />
+        <xacro:property name="dh_to_urdf_y" scope="parent" value="${-sin(alpha)*d}" />
+        <xacro:property name="dh_to_urdf_z" scope="parent" value="${cos(alpha)*d}" />
+    </xacro:macro>
+
+
+    <xacro:macro name="DH_joint" params = "parent child *axis joint_t:=fixed theta:=0.0 d:=0.0 a:=0.0 alpha:=0.0 limit_lower:=0. limit_upper:=${2*pi} velocity:=0.5 effort:=1000.0">
+            <xacro:dh_to_urdf theta="${theta}" d="${d}" a="${a}" alpha="${alpha}"/>
+            <joint name = "joint_${parent}_${child}" type = "${joint_t}">
+                <parent link = "${parent}"/>
+                <child link = "${child}"/>
+                <origin xyz="${dh_to_urdf_x} ${dh_to_urdf_y} ${dh_to_urdf_z}" rpy = "${dh_to_urdf_roll} ${dh_to_urdf_pitch} ${dh_to_urdf_yaw}"/>
+                <xacro:if value="${joint_t == 'revolute' or joint_t == 'prismatic'}">
+                    <xacro:insert_block name="axis"/>
+                    <limit lower = "${limit_lower}" upper = "${limit_upper}" velocity="${velocity}" effort="${effort}"/>
+                </xacro:if>
+            </joint>
+
+            <xacro:if value="${joint_t == 'revolute' or joint_t == 'prismatic'}">
+                <transmission name="${parent}_trans">
+                    <type>transmission_interface/SimpleTransmission</type>
+                    <joint name="joint_${parent}_${child}">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                    </joint>
+                    <actuator name="${parent}_motor">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                    </actuator>
+                </transmission>
+            </xacro:if>
+    </xacro:macro>
+
+    <xacro:macro name="DH_link" params="name theta:=0.0 d:=0.0 a:=0.0 alpha:=0.0 radius:=0.01">
+        <xacro:DH_inverse_translation theta="${theta}" d="${d}" a="${a}" alpha="${alpha}"/>
+        <xacro:ax_to_rpy az="1" bx="${dh_inverse_translation_x}" by="${dh_inverse_translation_y}" bz="${dh_inverse_translation_z}"/>
+        <xacro:property name="length" value="${sqrt(pow(dh_inverse_translation_x, 2) + pow(dh_inverse_translation_y, 2) + pow(dh_inverse_translation_z, 2))}" />
+        <link name="${name}">
+            <visual>
+                <origin xyz="${dh_inverse_translation_x/2} ${dh_inverse_translation_y/2} ${dh_inverse_translation_z/2}" rpy="${ax_roll} ${ax_pitch} ${ax_yaw}"/>
+                <geometry>
+                    <cylinder length="${length}"
+                     radius="${radius}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="${dh_inverse_translation_x/2} ${dh_inverse_translation_y/2} ${dh_inverse_translation_z/2}" rpy="${ax_roll} ${ax_pitch} ${ax_yaw}"/>
+                <geometry>
+                    <cylinder length="${length}"
+                     radius="${radius}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="${dh_inverse_translation_x/2} ${dh_inverse_translation_y/2} ${dh_inverse_translation_z/2}" rpy="${ax_roll} ${ax_pitch} ${ax_yaw}"/>
+
+                    <xacro:property name="mass" value="${bone_density*pi*pow(radius,2)*length}" />
+                    <mass value="${mass}"/>
+                    <inertia ixx="${1/12 * mass * (3*pow(radius,2) + pow(length,2))}"  ixy="0"  ixz="0" iyy="${1/12 * mass * (3*pow(radius,2) + pow(length,2))}"
+                    iyz="0" izz="${1/2 * mass * pow(radius,2)}" />
+
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <!--Gazebo link
+    <link name="world"/>
+    <joint name="joint_world_platform" type="fixed">
+        <parent link="world"/>
+        <child link="platform"/>
+    </joint>-->
+
+    <!--Human arm platform
+
+    <link name="platform">
+        <visual>
+            <origin xyz="0 0 1"/>
+            <geometry>
+                <cylinder length="2." radius="1.25"/>
+            </geometry>
+        </visual>
+        <collision>
+            <surface>
+                <contact>
+                    <collide_bitmask>0x01</collide_bitmask>
+                </contact>
+            </surface>
+            <origin xyz="0 0 1"/>
+            <geometry>
+                <cylinder length="2." radius="1.25"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 1"/>
+            <mass value="1000"/>
+                <inertia ixx="${1/12 * 1000 * (3*pow(1.25,2) + pow(2,2))}"  ixy="0"  ixz="0" iyy="${1/12 * 1000 * (3*pow(1.25,2) + pow(2,2))}"
+                 iyz="0" izz="${1/2 * 1000 * pow(1.25,2)}" />
+        </inertial>
+    </link>-->
+    
+    <!--Pseudo links. Gravity is also disabled.-->  
+    <xacro:property name="pseudo_a" value="${0.01}" />
+    <xacro:property name="pseudo_radius" value="${0.005}" />
+
+    <xacro:DH_link name="base_link" a="${pseudo_a}" radius="${pseudo_radius}"/>
+
+    <xacro:DH_link name="Scaphant"  a="${pseudo_a}" radius="${pseudo_radius}"/>
+
+    <xacro:DH_link name="Humphant"  a="${pseudo_a}" radius="${pseudo_radius}"/>
+
+    <xacro:DH_link name="Humphant1"  a="${pseudo_a}" radius="${pseudo_radius}"/>
+    
+    
+
+    <!-- Real links-->
+
+    <xacro:DH_link name="Humerus" theta="${radians(-90)}" d="${-len_humerus_y}" alpha="${radians(-90)}" />
+
+    <xacro:DH_link name="Ulna" theta="${radians(180)}" d="${len_ulna_z - len_humerus_z}" a="${-len_humerus_x}" alpha="${radians(-90)}" />
+
+    <xacro:DH_link name="Radius" theta="${radians(-124.2)}" d="${-len_ulna_y - len_radius_y - len_radius_yprime}" alpha="${radians(-90)}" />
+
+    <xacro:DH_link name="Z6" theta="${radians(101.3)}" d="${-len_radius_d}" a="${-len_radius_a}" alpha="${radians(97.8)}"  />
+
+    <xacro:DH_link name="Hand" theta="${radians(-90)}" a="${-0.08}" alpha="${radians(-90)}"/>
+
+    <!--Added pseudo link properties-->
+    
+    <xacro:DH_link name="Lunate" theta="${radians(13.7)}" alpha="${radians(-145)}" a="${pseudo_a}" radius="${pseudo_radius}"/>
+
+    <!--Human arm platform joints
+
+    <xacro:DH_joint parent="platform" child ="base_link" joint_t="fixed" d="2" a="-1.26">
+        <axis xyz="0 0 0"/>
+    </xacro:DH_joint>-->
+
+    <!-- Human arm joints-->
+    <xacro:DH_joint parent="base_link" child ="Scaphant" theta="${radians(90.0)}">
+        <axis xyz="0 0 0"/>
+    </xacro:DH_joint>
+    
+    <xacro:DH_joint parent="Scaphant" child ="Humphant" joint_t="revolute"
+     limit_lower="${joint1_lower}" limit_upper="${joint1_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+    <xacro:DH_joint parent="Humphant" child ="Humphant1" joint_t="revolute"
+     alpha="${radians(90)}" limit_lower="${joint2_lower}" 
+     limit_upper="${joint2_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+
+    <xacro:DH_joint parent="Humphant1" child ="Humerus" joint_t="revolute"
+     theta="${radians(-90)}" d="${-len_humerus_y}" alpha="${radians(-90)}" 
+     limit_lower="${joint3_lower}" limit_upper="${joint3_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+    <xacro:DH_joint parent="Humerus" child ="Ulna" joint_t="revolute"
+     theta="${radians(180)}" d="${len_ulna_z - len_humerus_z}" a="${-len_humerus_x}" alpha="${radians(-90)}" 
+     limit_lower="${joint4_lower}" limit_upper="${joint4_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+    <xacro:DH_joint parent="Ulna" child ="Radius" joint_t="revolute"
+     theta="${radians(-124.2)}" d="${-len_ulna_y - len_radius_y - len_radius_yprime}" alpha="${radians(-90)}" 
+     limit_lower="${joint5_lower}" limit_upper="${joint5_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+    <xacro:DH_joint parent="Radius" child ="Z6" joint_t="revolute"
+     theta="${radians(101.3)}" d="${-len_radius_d}" a="${-len_radius_a}" alpha="${radians(97.8)}" 
+     limit_lower="${joint6_lower}" limit_upper="${joint6_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+    
+    
+    <xacro:DH_joint parent="Z6" child ="Lunate" joint_t="revolute"
+     theta="${radians(13.7)}" alpha="${radians(-145)}" 
+     limit_lower="${joint7_lower}" limit_upper="${joint7_upper}">
+        <axis xyz="0 0 1"/>
+    </xacro:DH_joint>
+
+    <xacro:DH_joint parent="Lunate" child ="Hand"
+     theta="${radians(-90)}" a="${-0.08}" alpha="${radians(-90)}">
+        <axis xyz="0 0 0"/>
+    </xacro:DH_joint>
+
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <xacro:include filename="$(find human_arm_description)/urdf/human_arm_description.gazebo" />
+</robot>
+

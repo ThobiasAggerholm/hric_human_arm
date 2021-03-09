@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        </plugin>
+    </gazebo>
+<!-- 
+    <gazebo reference="platform">
+        <selfCollide>false</selfCollide>
+    </gazebo>
+-->
+
+
+    <gazebo reference="base_link">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+
+    <gazebo reference="Scaphant">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+
+    <gazebo reference="Humphant">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Humphant1">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Humerus">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Ulna">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Radius">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Z6">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Lunate">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="Hand">
+      <gravity>0</gravity>
+      <turnGravityOff>true</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+      <collision>
+          <surface>
+              <contact>
+                  <collide_bitmask>0x01</collide_bitmask>
+              </contact>
+          </surface>
+      </collision>
+    </gazebo>
+
+    <gazebo reference="joint_platform_base_link">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo> 
+
+    <gazebo reference="joint_base_link_Scaphant">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Scaphant_Humphant">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Humphant_Humphant1">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Humphant1_Humerus">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Humerus_Ulna">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Ulna_Radius">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Radius_Z6">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Z6_Lunate">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+
+    <gazebo reference="joint_Lunate_Hand">
+      <implicitSpringDamper>True</implicitSpringDamper>
+    </gazebo>
+</robot>
