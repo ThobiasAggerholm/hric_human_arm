@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="human_arm">
     <xacro:property name="scale" value="${1}" />
-    <xacro:property name="bone_density" value="${1850 * 100}" />
+    <xacro:property name="bone_density" value="${1850 * 10000}" />
 
     <xacro:property name="len_humerus_y" value="${0.2904*scale}" />
     <xacro:property name="len_ulna_z" value="${0.0200*scale}" />

@@ -52,8 +52,8 @@
     </collision>
     <inertial>
       <origin rpy="-0.0 -1.57079632679 0.0" xyz="-0.005 0.0 -0.0"/>
-      <mass value="0.145298660229"/>
-      <inertia ixx="2.118938795e-06" ixy="0" ixz="0" iyy="2.118938795e-06" iyz="0" izz="1.81623325286e-06"/>
+      <mass value="14.5298660229"/>
+      <inertia ixx="0.0002118938795" ixy="0" ixz="0" iyy="0.0002118938795" iyz="0" izz="0.000181623325286"/>
     </inertial>
   </link>
   <link name="Scaphant">
@@ -71,8 +71,8 @@
     </collision>
     <inertial>
       <origin rpy="-0.0 -1.57079632679 0.0" xyz="-0.005 0.0 -0.0"/>
-      <mass value="0.145298660229"/>
-      <inertia ixx="2.118938795e-06" ixy="0" ixz="0" iyy="2.118938795e-06" iyz="0" izz="1.81623325286e-06"/>
+      <mass value="14.5298660229"/>
+      <inertia ixx="0.0002118938795" ixy="0" ixz="0" iyy="0.0002118938795" iyz="0" izz="0.000181623325286"/>
     </inertial>
   </link>
   <link name="Humphant">
@@ -90,8 +90,8 @@
     </collision>
     <inertial>
       <origin rpy="-0.0 -1.57079632679 0.0" xyz="-0.005 0.0 -0.0"/>
-      <mass value="0.145298660229"/>
-      <inertia ixx="2.118938795e-06" ixy="0" ixz="0" iyy="2.118938795e-06" iyz="0" izz="1.81623325286e-06"/>
+      <mass value="14.5298660229"/>
+      <inertia ixx="0.0002118938795" ixy="0" ixz="0" iyy="0.0002118938795" iyz="0" izz="0.000181623325286"/>
     </inertial>
   </link>
   <link name="Humphant1">
@@ -109,8 +109,8 @@
     </collision>
     <inertial>
       <origin rpy="-0.0 -1.57079632679 0.0" xyz="-0.005 0.0 -0.0"/>
-      <mass value="0.145298660229"/>
-      <inertia ixx="2.118938795e-06" ixy="0" ixz="0" iyy="2.118938795e-06" iyz="0" izz="1.81623325286e-06"/>
+      <mass value="14.5298660229"/>
+      <inertia ixx="0.0002118938795" ixy="0" ixz="0" iyy="0.0002118938795" iyz="0" izz="0.000181623325286"/>
     </inertial>
   </link>
   <!-- Real links-->
@@ -129,8 +129,8 @@
     </collision>
     <inertial>
       <origin rpy="0.0 -0.0 0.0" xyz="-0.0 0.0 0.1452"/>
-      <mass value="16.8778923721"/>
-      <inertia ixx="0.119034373975" ixy="0" ixz="0" iyy="0.119034373975" iyz="0" izz="0.000843894618607"/>
+      <mass value="1687.78923721"/>
+      <inertia ixx="11.9034373975" ixy="0" ixz="0" iyy="11.9034373975" iyz="0" izz="0.0843894618607"/>
     </inertial>
   </link>
   <link name="Ulna">
@@ -148,8 +148,8 @@
     </collision>
     <inertial>
       <origin rpy="3.14159265359 -0.00483242991587 -3.14159265359" xyz="-0.00305 -3.7351727374e-19 -0.00385"/>
-      <mass value="0.570933146923"/>
-      <inertia ixx="1.88645827296e-05" ixy="0" ixz="0" iyy="1.88645827296e-05" iyz="0" izz="2.85466573461e-05"/>
+      <mass value="57.0933146923"/>
+      <inertia ixx="0.00188645827296" ixy="0" ixz="0" iyy="0.00188645827296" iyz="0" izz="0.00285466573461"/>
     </inertial>
   </link>
   <link name="Radius">
@@ -167,8 +167,8 @@
     </collision>
     <inertial>
       <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.12875"/>
-      <mass value="14.9657620035"/>
-      <inertia ixx="0.0830677737873" ixy="0" ixz="0" iyy="0.0830677737873" iyz="0" izz="0.000748288100177"/>
+      <mass value="1496.57620035"/>
+      <inertia ixx="8.30677737873" ixy="0" ixz="0" iyy="8.30677737873" iyz="0" izz="0.0748288100177"/>
     </inertial>
   </link>
   <link name="Z6">
@@ -186,8 +186,8 @@
     </collision>
     <inertial>
       <origin rpy="0.00370247507156 -0.00073982569831 -1.32797627839e-06" xyz="-0.00102871725727 -0.00514822695737 0.0146"/>
-      <mass value="1.80347422283"/>
-      <inertia ixx="0.000189799130106" ixy="0" ixz="0" iyy="0.000189799130106" iyz="0" izz="9.01737111415e-05"/>
+      <mass value="180.347422283"/>
+      <inertia ixx="0.0189799130106" ixy="0" ixz="0" iyy="0.0189799130106" iyz="0" izz="0.00901737111415"/>
     </inertial>
   </link>
   <link name="Hand">
@@ -205,8 +205,8 @@
     </collision>
     <inertial>
       <origin rpy="-1.57079632679 6.12323399574e-17 -6.12323399574e-17" xyz="2.44929359829e-18 0.04 -0.0"/>
-      <mass value="4.64955712731"/>
-      <inertia ixx="0.00259600272942" ixy="0" ixz="0" iyy="0.00259600272942" iyz="0" izz="0.000232477856366"/>
+      <mass value="464.955712731"/>
+      <inertia ixx="0.259600272942" ixy="0" ixz="0" iyy="0.259600272942" iyz="0" izz="0.0232477856366"/>
     </inertial>
   </link>
   <!--Added pseudo link properties-->
@@ -225,8 +225,8 @@
     </collision>
     <inertial>
       <origin rpy="-1.57079632679 -1.33168621927 1.33168621927" xyz="-0.00485774559999 0.00118419073033 -0.0"/>
-      <mass value="0.145298660229"/>
-      <inertia ixx="2.118938795e-06" ixy="0" ixz="0" iyy="2.118938795e-06" iyz="0" izz="1.81623325286e-06"/>
+      <mass value="14.5298660229"/>
+      <inertia ixx="0.0002118938795" ixy="0" ixz="0" iyy="0.0002118938795" iyz="0" izz="0.000181623325286"/>
     </inertial>
   </link>
   <!--Human arm platform joints
@@ -363,12 +363,13 @@
   </gazebo>
   <!-- 
     <gazebo reference="platform">
-        <selfCollide>0</selfCollide>
+        <selfCollide>false</selfCollide>
     </gazebo>
 -->
   <gazebo reference="base_link">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -380,7 +381,8 @@
   </gazebo>
   <gazebo reference="Scaphant">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -392,7 +394,8 @@
   </gazebo>
   <gazebo reference="Humphant">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -404,7 +407,8 @@
   </gazebo>
   <gazebo reference="Humphant1">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -416,7 +420,8 @@
   </gazebo>
   <gazebo reference="Humerus">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -428,7 +433,8 @@
   </gazebo>
   <gazebo reference="Ulna">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -440,7 +446,8 @@
   </gazebo>
   <gazebo reference="Radius">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -452,7 +459,8 @@
   </gazebo>
   <gazebo reference="Z6">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -464,7 +472,8 @@
   </gazebo>
   <gazebo reference="Lunate">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
@@ -476,7 +485,8 @@
   </gazebo>
   <gazebo reference="Hand">
     <gravity>0</gravity>
-    <selfCollide>0</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+    <selfCollide>false</selfCollide>
     <material>Gazebo/Orange</material>
     <collision>
       <surface>
